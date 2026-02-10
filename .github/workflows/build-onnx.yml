@@ -151,6 +151,7 @@ jobs:
       - name: Verify build
         run: |
           source $GITHUB_WORKSPACE/onnx-build-env/bin/activate
+          pip3 install flatbuffers coloredlogs packaging protobuf
           # Test the wheel installation
           pip3 install $GITHUB_WORKSPACE/build_output/*.whl
           python3 -c "import onnxruntime; print('ONNX Runtime version:', onnxruntime.__version__)"
