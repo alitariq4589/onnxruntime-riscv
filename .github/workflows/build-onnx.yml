@@ -41,8 +41,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Python environment
+      - name: Setup Python virtual environment
         run: |
+          python3 -m venv $GITHUB_WORKSPACE/onnx-build-env
+          source $GITHUB_WORKSPACE/onnx-build-env/bin/activate
           python3 -m pip install --upgrade pip
           pip3 install --upgrade setuptools wheel numpy
 
@@ -89,6 +91,7 @@ jobs:
 
       - name: Build ONNX Runtime
         run: |
+          source $GITHUB_WORKSPACE/onnx-build-env/bin/activate
           cd onnxruntime
           
           # Use the build script with optimizations
@@ -123,6 +126,7 @@ jobs:
 
       - name: Package build artifacts
         run: |
+          source $GITHUB_WORKSPACE/onnx-build-env/bin/activate
           cd onnxruntime
           
           # Copy wheel and libraries to output directory
@@ -145,6 +149,7 @@ jobs:
 
       - name: Verify build
         run: |
+          source $GITHUB_WORKSPACE/onnx-build-env/bin/activate
           # Test the wheel installation
           pip3 install $GITHUB_WORKSPACE/build_output/*.whl
           python3 -c "import onnxruntime; print('ONNX Runtime version:', onnxruntime.__version__)"
