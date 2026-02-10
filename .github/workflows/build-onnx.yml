@@ -36,7 +36,8 @@ jobs:
             libprotobuf-dev \
             protobuf-compiler \
             libpython3-dev \
-            ninja-build
+            ninja-build \
+            python3.12-venv
 
       - name: Checkout repo
         uses: actions/checkout@v4
