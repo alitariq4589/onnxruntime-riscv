@@ -96,7 +96,7 @@ jobs:
             --config Release \
             --build_shared_lib \
             --build_wheel \
-            --parallel 8 \
+            --parallel 64 \
             --skip_tests \
             --cmake_generator Ninja \
             --allow_running_as_root
